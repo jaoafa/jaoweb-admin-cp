@@ -139,7 +139,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import { DataTableHeader } from 'Vuetify'
+import { DataTableHeader } from 'vuetify'
 import { CountInterface, EditData } from '~/api/models/EditDataResult'
 import User from '~/api/models/User'
 
