@@ -1,11 +1,11 @@
 // import colors from 'vuetify/es5/util/colors'
-import { Configuration as NuxtConfiguration } from '@nuxt/types'
+import { NuxtConfig } from '@nuxt/types'
 
-const baseDir = process.env.BASE_DIR || '/'
+// const baseDir = process.env.BASE_DIR || '/'
 
 // const shortHash = execSync('git rev-parse --short HEAD').toString()
 
-const config: NuxtConfiguration = {
+const config: NuxtConfig = {
   head: {
     titleTemplate: '%s - jMS Admin - CP',
     title: 'jMS Admin - CP',
@@ -57,10 +57,16 @@ const config: NuxtConfiguration = {
     },
   },
 
-  build: {},
-
   router: {
-    base: baseDir,
+    base: 'test/'
+  },
+
+  build: {
+    extend(config, ctx) {
+      if (!ctx.isDev && config.output) {
+        config.output.publicPath = '_nuxt/'
+      }
+    }
   },
 
   srcDir: 'src/',
