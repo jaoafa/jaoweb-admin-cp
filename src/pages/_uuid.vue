@@ -310,7 +310,7 @@ export default Vue.extend({
       this.data = []
       this.isLoading = true
       fetch(
-        '/api/users/' +
+        '/cp/api/users/' +
           selected.userid +
           '/' +
           this.page +
