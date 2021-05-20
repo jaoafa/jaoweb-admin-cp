@@ -58,7 +58,7 @@ const config: NuxtConfig = {
   },
 
   router: {
-    base: 'test/'
+    base: 'cp/'
   },
 
   build: {
