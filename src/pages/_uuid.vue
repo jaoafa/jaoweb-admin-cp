@@ -226,7 +226,7 @@ export default Vue.extend({
       if (this.search === null || this.search.length === 0) return
       if (this.isSearchLoading) return
       this.isSearchLoading = true
-      fetch('/api/users/' + this.search)
+      fetch('/cp/api/users/' + this.search)
         .then((res) => res.json())
         .then((res) => {
           this.items = res
@@ -256,7 +256,7 @@ export default Vue.extend({
   mounted() {
     if ('uuid' in this.$route.params) {
       this.isSearchLoading = true
-      fetch('/api/users/' + this.$route.params.uuid + '?filter=' + this.filter)
+      fetch('/cp/api/users/' + this.$route.params.uuid + '?filter=' + this.filter)
         .then((res) => res.json())
         .then((res) => {
           if (res.length === 1) {
