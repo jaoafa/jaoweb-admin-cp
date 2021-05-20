@@ -57,16 +57,9 @@ const config: NuxtConfig = {
     },
   },
 
-  router: {
-    base: 'cp/'
-  },
-
+  buildDir: '_nuxt/',
   build: {
-    extend(config, ctx) {
-      if (!ctx.isDev && config.output) {
-        config.output.publicPath = '_nuxt/'
-      }
-    }
+    publicPath: 'cp/_nuxt/',
   },
 
   srcDir: 'src/',
