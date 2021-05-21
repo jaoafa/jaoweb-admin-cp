@@ -1,20 +1,4 @@
 # jaoweb-admin-cp
 
-## Build Setup
+[jao Minecraft Server](https://jaoafa.com) の管理用に作られた、 [CoreProtect](https://www.spigotmc.org/resources/coreprotect.8631/) が収集するブロック編集ログの Web インタフェースです。
 
-```bash
-# install dependencies
-$ yarn install
-
-# serve with hot reload at localhost:3000
-$ yarn dev
-
-# build for production and launch server
-$ yarn build
-$ yarn start
-
-# generate static project
-$ yarn generate
-```
-
-For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).

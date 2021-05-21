@@ -7,8 +7,8 @@ import { NuxtConfig } from '@nuxt/types'
 
 const config: NuxtConfig = {
   head: {
-    titleTemplate: '%s - jMS Admin - CP',
-    title: 'jMS Admin - CP',
+    titleTemplate: 'jMS Admin CP',
+    title: 'jMS Admin CP',
     htmlAttrs: {
       lang: 'ja',
     },
