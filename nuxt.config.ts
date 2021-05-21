@@ -61,14 +61,6 @@ const config: NuxtConfig = {
     base: '/cp/'
   },
 
-  build: {
-    extend(config, ctx) {
-      if (!ctx.isDev && config.output) {
-        config.output.publicPath = '_nuxt/'
-      }
-    }
-  },
-
   srcDir: 'src/',
 
   generate: {
