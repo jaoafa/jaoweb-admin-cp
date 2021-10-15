@@ -58,7 +58,7 @@ const config: NuxtConfig = {
   },
 
   router: {
-    base: '/cp/'
+    base: '/cp/',
   },
 
   srcDir: 'src/',
@@ -68,6 +68,8 @@ const config: NuxtConfig = {
   },
 
   serverMiddleware: ['~/api'],
+
+  telemetry: false,
 }
 
 module.exports = config

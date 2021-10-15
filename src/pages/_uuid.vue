@@ -348,6 +348,7 @@ export default Vue.extend({
     margin: 0 0.3em;
   }
 }
+
 .pointer {
   cursor: pointer;
 }
