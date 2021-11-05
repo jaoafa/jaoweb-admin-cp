@@ -46,6 +46,14 @@ jobs:
           git config --global user.name "GitHub Action"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
+      - name: Run linter 👀
+        run: yarn lint
+
+      - name: Run build & generate 🏗️
+        run: |
+          yarn build
+          yarn generate
+
       - name: Is modified
         id: is-modified
         run: |
