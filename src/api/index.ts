@@ -19,10 +19,10 @@ const app = express()
 app.get(
   '/',
   (_req: express.Request, res: express.Response, next: NextFunction) => {
-    (async () => {
+    ;(async () => {
       const conn = await getHatDBConnection()
       if (conn == null) {
-        res.status(500).json({ message: "Database connection error." })
+        res.status(500).json({ message: 'Database connection error.' })
         return
       }
       res.json({ message: 'Hello, jaoweb-admin-cp!' })
@@ -30,67 +30,78 @@ app.get(
   }
 )
 
-app.get('/users/:mcidOrUuid', (req: express.Request, res: express.Response, next: NextFunction) => {
-  (async () => {
-    const conn = await getHatDBConnection()
-    if (conn == null) {
-      res.status(500).json({ message: "Database connection error." })
-      return
-    }
-
-    try {
-      const [rows] = await conn.execute("SELECT * FROM co_user WHERE uuid IS NOT NULL AND (uuid LIKE ? OR user LIKE ?)", [
-        `%${req.params.mcidOrUuid}%`, `%${req.params.mcidOrUuid}%`
-      ]) as RowDataPacket[][]
-
-      const ret: User[] = []
-      for (const row of rows) {
-        ret.push({
-          userid: row.rowid,
-          mcid: row.user,
-          uuid: row.uuid
-        })
+app.get(
+  '/users/:mcidOrUuid',
+  (req: express.Request, res: express.Response, next: NextFunction) => {
+    ;(async () => {
+      const conn = await getHatDBConnection()
+      if (conn == null) {
+        res.status(500).json({ message: 'Database connection error.' })
+        return
       }
-      res.json(ret)
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.log(e)
-    } finally {
-      conn.end()
-    }
-  })().catch(next)
-})
+
+      try {
+        const [rows] = (await conn.execute(
+          'SELECT * FROM co_user WHERE uuid IS NOT NULL AND (uuid LIKE ? OR user LIKE ?)',
+          [`%${req.params.mcidOrUuid}%`, `%${req.params.mcidOrUuid}%`]
+        )) as RowDataPacket[][]
+
+        const ret: User[] = []
+        for (const row of rows) {
+          ret.push({
+            userid: row.rowid,
+            mcid: row.user,
+            uuid: row.uuid,
+          })
+        }
+        res.json(ret)
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.log(e)
+      } finally {
+        conn.end()
+      }
+    })().catch(next)
+  }
+)
 
 app.get(
   '/users/:userId/:page',
   (req: express.Request, res: express.Response, next: NextFunction) => {
-    (async () => {
+    ;(async () => {
       const conn = await getHatDBConnection()
       if (conn == null) {
-        res.status(500).json({ message: "Database connection error." })
+        res.status(500).json({ message: 'Database connection error.' })
         return
       }
 
       try {
         if (isNaN(parseInt(req.params.userId))) {
-          res.status(400).json({ message: "userId には数値を指定してください。" })
+          res
+            .status(400)
+            .json({ message: 'userId には数値を指定してください。' })
           return
         }
         const userId: number = parseInt(req.params.userId, 10)
 
         if (isNaN(parseInt(req.params.page))) {
-          res.status(400).json({ message: "page には数値を指定してください。" })
+          res.status(400).json({ message: 'page には数値を指定してください。' })
           return
         }
         const page: number = parseInt(req.params.page, 10)
 
         const conn = await getHatDBConnection()
         if (conn == null) {
-          res.status(500).json({ message: "Database connection error." })
+          res.status(500).json({ message: 'Database connection error.' })
           return
         }
 
-        const filterAction = "filter" in req.query && req.query.filter !== "" && req.query.filter !== null ? req.query.filter as string : undefined
+        const filterAction =
+          'filter' in req.query &&
+          req.query.filter !== '' &&
+          req.query.filter !== null
+            ? (req.query.filter as string)
+            : undefined
 
         const userState = await getUserState(conn, userId)
         const editData = await getEditData(conn, userId, page, filterAction)
@@ -101,9 +112,9 @@ app.get(
             destroy: userState.destroyCount,
             rollbackPlace: userState.rollbackPlaceCount,
             rollbackDestroy: userState.rollbackDestroyCount,
-            all: userState.allCount
+            all: userState.allCount,
           },
-          data: editData
+          data: editData,
         }
         res.json(result)
       } catch (e) {

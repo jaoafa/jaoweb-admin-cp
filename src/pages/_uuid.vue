@@ -256,7 +256,9 @@ export default Vue.extend({
   mounted() {
     if ('uuid' in this.$route.params) {
       this.isSearchLoading = true
-      fetch('/cp/api/users/' + this.$route.params.uuid + '?filter=' + this.filter)
+      fetch(
+        '/cp/api/users/' + this.$route.params.uuid + '?filter=' + this.filter
+      )
         .then((res) => res.json())
         .then((res) => {
           if (res.length === 1) {

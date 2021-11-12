@@ -11,7 +11,7 @@ export async function getHatDBConnection(): Promise<mysql.Connection | null> {
       user: process.env.HATDBUSER,
       password: process.env.HATDBPASS,
       database: process.env.HATDBNAME,
-      timezone: '+09:00'
+      timezone: '+09:00',
     })
     await connection.beginTransaction()
 

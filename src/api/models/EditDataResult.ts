@@ -1,6 +1,6 @@
-import { BlockData } from "./BlockData"
-import { Material } from "./Material"
-import { World } from "./World"
+import { BlockData } from './BlockData'
+import { Material } from './Material'
+import { World } from './World'
 
 export interface EditData {
   id: number
@@ -24,6 +24,6 @@ export interface CountInterface {
 }
 
 export interface EditDataResult {
-  count: CountInterface,
+  count: CountInterface
   data: EditData[]
 }

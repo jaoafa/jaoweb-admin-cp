@@ -1,5 +1,5 @@
-import { RowDataPacket } from "mysql2"
-import { getHatDBConnection } from "../lib/mysql"
+import { RowDataPacket } from 'mysql2'
+import { getHatDBConnection } from '../lib/mysql'
 
 export interface BlockData {
   id: number
@@ -14,12 +14,14 @@ export async function fetch(): Promise<boolean> {
     return false
   }
 
-  const [rows] = await conn.execute("SELECT * FROM co_blockdata_map") as RowDataPacket[][]
+  const [rows] = (await conn.execute(
+    'SELECT * FROM co_blockdata_map'
+  )) as RowDataPacket[][]
   cache.clear()
   for (const row of rows) {
     cache.set(row.rowid, {
       id: row.rowid,
-      data: row.data
+      data: row.data,
     })
   }
   return true

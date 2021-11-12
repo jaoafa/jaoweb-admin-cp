@@ -1,5 +1,5 @@
-import { RowDataPacket } from "mysql2"
-import { getHatDBConnection } from "../lib/mysql"
+import { RowDataPacket } from 'mysql2'
+import { getHatDBConnection } from '../lib/mysql'
 
 export interface World {
   id: number
@@ -14,12 +14,14 @@ export async function fetch(): Promise<boolean> {
     return false
   }
 
-  const [rows] = await conn.execute("SELECT * FROM co_world") as RowDataPacket[][]
+  const [rows] = (await conn.execute(
+    'SELECT * FROM co_world'
+  )) as RowDataPacket[][]
   cache.clear()
   for (const row of rows) {
     cache.set(row.rowid, {
       id: row.rowid,
-      name: row.world
+      name: row.world,
     })
   }
   return true
