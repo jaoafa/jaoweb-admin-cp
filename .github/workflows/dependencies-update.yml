@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       exec-from:
-        description: "The project/user to execute from"
+        description: 'The project/user to execute from'
         required: false
         default: None
 
