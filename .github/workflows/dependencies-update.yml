@@ -63,6 +63,7 @@ jobs:
       - name: Is modified
         id: is-modified
         run: |
+          git diff
           git status | grep modified
           echo "::set-output name=modified::`echo $?`"
 
