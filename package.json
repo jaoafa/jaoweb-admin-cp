@@ -29,7 +29,7 @@
     "mysql2": "2.3.3",
     "nuxt": "2.15.8",
     "nuxt-clipboard2": "0.2.1",
-    "sass": "1.49.0"
+    "sass": "1.49.4"
   },
   "devDependencies": {
     "@commitlint/cli": "16.1.0",
