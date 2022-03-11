@@ -270,6 +270,8 @@ export default Vue.extend({
           }
         })
         .catch((err) => {
+          this.snackbarText =
+            '処理中にエラーが発生しました。少しおいてからもう一度お試しください'
           // eslint-disable-next-line no-console
           console.log(err)
         })
