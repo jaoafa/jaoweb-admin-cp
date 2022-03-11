@@ -311,6 +311,7 @@ export default Vue.extend({
       if (selected === null) return
       this.data = []
       this.isLoading = true
+      history.replaceState({}, '', '/cp/' + selected.uuid)
       fetch(
         '/cp/api/users/' +
           selected.userid +

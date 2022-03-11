@@ -1,8 +1,8 @@
-import mysql from 'mysql2/promise'
+import { Connection, createConnection } from 'mysql2/promise'
 
-export async function getHatDBConnection(): Promise<mysql.Connection | null> {
+export async function getHatDBConnection(): Promise<Connection | null> {
   try {
-    const connection = await mysql.createConnection({
+    const connection = await createConnection({
       host: process.env.HATDBHOST,
       port:
         process.env.HATDBPORT !== undefined
