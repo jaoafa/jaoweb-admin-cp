@@ -255,6 +255,9 @@ export default Vue.extend({
 
   mounted() {
     if ('uuid' in this.$route.params) {
+      if ('filter' in this.$route.query) {
+        this.filter = this.$route.query.filter as 'place' | 'destroy' | null
+      }
       this.isSearchLoading = true
       fetch(
         '/cp/api/users/' + this.$route.params.uuid + '?filter=' + this.filter
@@ -317,7 +320,17 @@ export default Vue.extend({
       if (selected === null) return
       this.data = []
       this.isLoading = true
-      history.replaceState({}, '', '/cp/' + selected.uuid)
+      const sp = new URLSearchParams()
+      if (this.filter !== null) sp.append('filter', this.filter)
+      if (this.page !== 1) sp.append('page', this.page.toString())
+
+      history.replaceState(
+        {},
+        '',
+        '/cp/' +
+          selected.uuid +
+          (sp.toString().length > 0 ? '?' + sp.toString() : '')
+      )
       fetch(
         '/cp/api/users/' +
           selected.userid +
