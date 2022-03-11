@@ -156,7 +156,7 @@ export default Vue.extend({
     page: number
     snackbar: boolean
     snackbarText: string | null
-    filter: string | null
+    filter: 'place' | 'destroy' | null
   } {
     return {
       selected: null,
@@ -304,7 +304,13 @@ export default Vue.extend({
       return String(action)
     },
     getTotalPage() {
-      return Math.ceil(this.count.all / 50)
+      const count =
+        this.filter === null
+          ? this.count.all
+          : this.filter === 'place'
+          ? this.count.place
+          : this.count.destroy
+      return Math.ceil(count / 50)
     },
     fetchData() {
       const selected = this.selected
