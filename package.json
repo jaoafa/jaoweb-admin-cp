@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "5.13.6",
-    "core-js": "3.22.0",
+    "core-js": "3.22.1",
     "cross-env": "7.0.3",
     "express": "4.17.3",
     "mysql2": "2.3.3",
