@@ -1,14 +1,16 @@
 // import colors from 'vuetify/es5/util/colors'
 import { NuxtConfig } from '@nuxt/types'
 
+const siteName = process.env.SITE_NAME || 'jMS Admin CP'
+const pageTitle = process.env.PAGE_TITLE || 'CoreProtect Viewer'
 // const baseDir = process.env.BASE_DIR || '/'
 
 // const shortHash = execSync('git rev-parse --short HEAD').toString()
 
 const config: NuxtConfig = {
   head: {
-    titleTemplate: 'jMS Admin CP',
-    title: 'jMS Admin CP',
+    titleTemplate: siteName,
+    title: siteName,
     htmlAttrs: {
       lang: 'ja',
     },
@@ -73,6 +75,11 @@ const config: NuxtConfig = {
 
   server: {
     host: '0.0.0.0',
+  },
+
+  publicRuntimeConfig: {
+    siteName,
+    pageTitle,
   },
 }
 

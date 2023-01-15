@@ -25,7 +25,12 @@ app.get(
         res.status(500).json({ message: 'Database connection error.' })
         return
       }
-      res.json({ message: 'Hello, jaoweb-admin-cp!' })
+      const siteName = process.env.SITE_NAME || 'jMS Admin CP'
+      const pageTitle = process.env.PAGE_TITLE || 'CoreProtect Viewer'
+      res.json({
+        message: 'Hello, jaoweb-admin-cp!',
+        override: { siteName, pageTitle },
+      })
     })().catch(next)
   }
 )
