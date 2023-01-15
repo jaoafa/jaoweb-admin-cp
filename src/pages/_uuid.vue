@@ -227,6 +227,7 @@ export default Vue.extend({
 
   head() {
     return {
+      // @ts-ignore
       title: this.pageTitle,
     }
   },
@@ -278,7 +279,6 @@ export default Vue.extend({
         .then((res) => res.json())
         .then((res) => {
           if (!res.override) return
-          console.log(res.override)
           this.siteName = res.override.siteName || this.siteName
           this.pageTitle = res.override.pageTitle || this.pageTitle
         })
