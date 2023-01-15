@@ -1,6 +1,6 @@
 <template>
   <div class="main-container">
-    <h1 class="text-center">CoreProtect Viewer</h1>
+    <h1 class="text-center">{{ pageTitle }}</h1>
 
     <v-autocomplete
       v-model="selected"
@@ -157,6 +157,8 @@ export default Vue.extend({
     snackbar: boolean
     snackbarText: string | null
     filter: 'place' | 'destroy' | null
+    siteName: string
+    pageTitle: string
   } {
     return {
       selected: null,
@@ -218,6 +220,14 @@ export default Vue.extend({
       snackbar: false,
       snackbarText: null,
       filter: null,
+      siteName: 'jMS Admin CP',
+      pageTitle: 'CoreProtect Viewer',
+    }
+  },
+
+  head() {
+    return {
+      title: this.pageTitle,
     }
   },
 
@@ -253,12 +263,26 @@ export default Vue.extend({
     },
   },
 
+  created() {
+    this.siteName = this.$config.siteName || 'jMS Admin CP'
+    this.pageTitle = this.$config.siteTitle || 'CoreProtect Viewer'
+  },
+
   mounted() {
     if ('uuid' in this.$route.params) {
       if ('filter' in this.$route.query) {
         this.filter = this.$route.query.filter as 'place' | 'destroy' | null
       }
       this.isSearchLoading = true
+      fetch('/cp/api/')
+        .then((res) => res.json())
+        .then((res) => {
+          if (!res.override) return
+          console.log(res.override)
+          this.siteName = res.override.siteName || this.siteName
+          this.pageTitle = res.override.pageTitle || this.pageTitle
+        })
+
       fetch(
         '/cp/api/users/' + this.$route.params.uuid + '?filter=' + this.filter
       )
